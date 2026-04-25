@@ -61,9 +61,22 @@ textarea {
   padding: 10px;
   height: 150px;
 }
-.logo svg {
-  width: 32px;
-  height: 32px;
+
+/* TOPO PREMIUM REAL */
+.topbar {
+  background: linear-gradient(135deg, #071527, #12385C);
+  color: white;
+  padding: 12px 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
@@ -74,16 +87,22 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
-.topbar {
-  background: linear-gradient(135deg, #071527, #12385C);
-  color: white;
-  padding: 12px 18px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.logo svg {
+  width: 30px;
+  height: 30px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 22px;
+  background: none;
+  padding: 0;
+}
+
+.brand p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
 }
