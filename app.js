@@ -323,7 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("./sw.js").catch(() => {});
-}function apagarHistorico() {
+}
+function apagarHistorico() {
   if (confirm("Tem certeza que deseja apagar todo o histórico?")) {
     localStorage.removeItem("solarGestaoHistorico");
     document.getElementById("historico").innerHTML = "<p>Nenhum histórico salvo ainda.</p>";
