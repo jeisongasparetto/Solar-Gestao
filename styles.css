@@ -69,3 +69,13 @@ textarea {
   padding: 10px;
   height: 150px;
 }
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
