@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Gestão</title>
+  <meta name="theme-color" content="#0D1B2A" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="70" cy="25" r="13" fill="#FF8A00"/>
+          <path d="M16 62 C25 32 47 18 76 32" fill="none" stroke="#FFC107" stroke-width="7" stroke-linecap="round"/>
+          <path d="M24 62 L45 42 L66 62" fill="none" stroke="#0D1B2A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M33 62 H78 L66 82 H20 Z" fill="#1E88E5"/>
+          <path d="M43 63 L38 80 M57 63 L52 80 M72 63 L66 80 M31 72 H72" stroke="#EAF6FF" stroke-width="3"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Solar Gestão</h1>
+        <p>Controle de cobrança de energia solar para imóveis alugados</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnSalvar" class="btn">Salvar</button>
+      <button id="btnImprimir" class="btn secondary">PDF</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="section-title">
+        <h2>Configuração</h2>
+        <span>Preencha o mês, desconto e investimento do sistema</span>
+      </div>
+
+      <div class="config-grid">
+        <label>
+          Mês de referência
+          <input id="mes" type="text" placeholder="Ex: Abril/2026" />
+        </label>
+
+        <label>
+          Desconto ao inquilino (%)
+          <input id="desconto" type="text" value="10" />
+        </label>
+
+        <label>
+          Investimento do sistema (R$)
+          <input id="investimento" type="text" value="15000" />
+        </label>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi">
+        <span>Total das faturas</span>
+        <strong id="kpiConsumo">R$ 0,00</strong>
+      </div>
+      <div class="kpi">
+        <span>Total compensado</span>
+        <strong id="kpiInjetado">R$ 0,00</strong>
+      </div>
+      <div class="kpi primary">
+        <span>Total a receber</span>
+        <strong id="kpiReceber">R$ 0,00</strong>
+      </div>
+      <div class="kpi">
+        <span>Economia total</span>
+        <strong id="kpiEconomia">R$ 0,00</strong>
+      </div>
+      <div class="kpi">
+        <span>Payback estimado</span>
+        <strong id="kpiPayback">-</strong>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>Lançamentos das casas</h2>
+        <span>Digite somente os campos em branco. Os cálculos são automáticos.</span>
+      </div>
+
+      <div class="table-wrap">
+        <table id="tabela">
+          <thead>
+            <tr>
+              <th>Casa</th>
+              <th>Unidade consumidora</th>
+              <th>Inquilino</th>
+              <th>Consumo da fatura (R$)</th>
+              <th>Valor injetado/compensado (R$)</th>
+              <th>Desconto</th>
+              <th>Economia</th>
+              <th>Valor total a pagar</th>
+              <th>WhatsApp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row="1">
+              <td><input id="casa1" value="Casa 1"></td>
+              <td><input id="uc1" placeholder="UC"></td>
+              <td><input id="inq1" placeholder="Nome"></td>
+              <td><input id="consumo1" class="money-input" placeholder="0,00"></td>
+              <td><input id="injetado1" class="money-input" placeholder="0,00"></td>
+              <td class="result" id="desconto1">R$ 0,00</td>
+              <td class="result economy" id="economia1">R$ 0,00</td>
+              <td class="result total" id="pagar1">R$ 0,00</td>
+              <td><button class="btn small" data-msg="1">Copiar</button></td>
+            </tr>
+            <tr data-row="2">
+              <td><input id="casa2" value="Casa 2"></td>
+              <td><input id="uc2" placeholder="UC"></td>
+              <td><input id="inq2" placeholder="Nome"></td>
+              <td><input id="consumo2" class="money-input" placeholder="0,00"></td>
+              <td><input id="injetado2" class="money-input" placeholder="0,00"></td>
+              <td class="result" id="desconto2">R$ 0,00</td>
+              <td class="result economy" id="economia2">R$ 0,00</td>
+              <td class="result total" id="pagar2">R$ 0,00</td>
+              <td><button class="btn small" data-msg="2">Copiar</button></td>
+            </tr>
+            <tr data-row="3">
+              <td><input id="casa3" value="Casa 3"></td>
+              <td><input id="uc3" placeholder="UC"></td>
+              <td><input id="inq3" placeholder="Nome"></td>
+              <td><input id="consumo3" class="money-input" placeholder="0,00"></td>
+              <td><input id="injetado3" class="money-input" placeholder="0,00"></td>
+              <td class="result" id="desconto3">R$ 0,00</td>
+              <td class="result economy" id="economia3">R$ 0,00</td>
+              <td class="result total" id="pagar3">R$ 0,00</td>
+              <td><button class="btn small" data-msg="3">Copiar</button></td>
+            </tr>
+            <tr data-row="4">
+              <td><input id="casa4" value="Casa 4"></td>
+              <td><input id="uc4" placeholder="UC"></td>
+              <td><input id="inq4" placeholder="Nome"></td>
+              <td><input id="consumo4" class="money-input" placeholder="0,00"></td>
+              <td><input id="injetado4" class="money-input" placeholder="0,00"></td>
+              <td class="result" id="desconto4">R$ 0,00</td>
+              <td class="result economy" id="economia4">R$ 0,00</td>
+              <td class="result total" id="pagar4">R$ 0,00</td>
+              <td><button class="btn small" data-msg="4">Copiar</button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Totais</td>
+              <td id="totalConsumoTabela">R$ 0,00</td>
+              <td id="totalInjetadoTabela">R$ 0,00</td>
+              <td id="totalDescontoTabela">R$ 0,00</td>
+              <td id="totalEconomiaTabela">R$ 0,00</td>
+              <td id="totalPagarTabela">R$ 0,00</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button id="btnCalcular" class="btn">Calcular agora</button>
+        <button id="btnTextoGeral" class="btn secondary">Gerar texto geral</button>
+        <button id="btnHistorico" class="btn secondary">Salvar no histórico</button>
+        <button id="btnBackup" class="btn secondary">Baixar backup</button>
+        <button id="btnImportar" class="btn secondary">Importar backup</button>
+        <button id="btnLimpar" class="btn danger">Limpar</button>
+        <input id="fileImport" type="file" accept=".json" hidden />
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>Texto pronto para WhatsApp</h2>
+        <span>Copie e envie ao inquilino ou ao responsável.</span>
+      </div>
+      <textarea id="mensagem" placeholder="Clique em gerar texto geral ou em copiar na linha da casa."></textarea>
+      <div class="actions two">
+        <button id="btnCopiarTexto" class="btn">Copiar texto</button>
+        <button id="btnLimparTexto" class="btn secondary">Limpar texto</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>Histórico salvo neste aparelho</h2>
+        <span>Registro simples para acompanhar os meses.</span>
+      </div>
+      <div id="historico" class="history"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Solar Gestão — versão inicial para GitHub Pages</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
